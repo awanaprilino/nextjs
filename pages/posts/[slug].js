@@ -23,39 +23,39 @@ export default function Post({ post, posts, preview }) {
 
   return (
     <Layout preview={preview}>
+      <Header />
       <Container>
-        <Header />
         {router.isFallback ? (
           <PostTitle>Loading…</PostTitle>
         ) : (
-          <>
-            <article>
-              <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
-                <meta
-                  property="og:image"
-                  content={post.featuredImage?.node?.sourceUrl}
+            <>
+              <article>
+                <Head>
+                  <title>
+                    {post.title} | AWANPC
+                  </title>
+                  <meta
+                    property="og:image"
+                    content={post.featuredImage?.node?.sourceUrl}
+                  />
+                </Head>
+                <PostHeader
+                  title={post.title}
+                  coverImage={post.featuredImage.node}
+                  date={post.date}
+                  author={post.author.node}
+                  categories={post.categories}
                 />
-              </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.featuredImage.node}
-                date={post.date}
-                author={post.author.node}
-                categories={post.categories}
-              />
-              <PostBody content={post.content} />
-              <footer>
-                {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
-              </footer>
-            </article>
+                <PostBody content={post.content} />
+                <footer>
+                  {post.tags.edges.length > 0 && <Tags tags={post.tags} />}
+                </footer>
+              </article>
 
-            <SectionSeparator />
-            {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-          </>
-        )}
+              <SectionSeparator />
+              {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+            </>
+          )}
       </Container>
     </Layout>
   )
